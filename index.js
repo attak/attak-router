@@ -39,11 +39,16 @@ class Router {
   handler(event, context, callback) {
     var _this = this
     var routes = this.options.routes
+    var invocation = this.options.invocation || 'local'
     var results = undefined
     var response = {
       invoke: function(handleProc) {
         if (handleProc) {
-          context.invokeLocal(handleProc, event, callback)
+          if (invocation === 'local') {
+            context.invokeLocal(handleProc, event, callback)
+          } else {
+            context.invoke(handleProc, event, callback)
+          }
         } else {
           callback(null, {
             httpStatus: 404
@@ -56,8 +61,6 @@ class Router {
       method: event.httpMethod.toLowerCase(),
       url: event.path
     }
-
-
 
     this.router.handle(request, response, function(err) {
       if (err) {
