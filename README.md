@@ -20,9 +20,9 @@ module.exports = {
   processors: {
     endpoint: new Router({
       routes: {
-        "GET /api/cats": 'getCats'
-        "GET /api/cats/:id": 'getCat'
-        "POST /api/cats": 'createCat'
+        "GET /api/cats": 'getCats',
+        "GET /api/cats/:id": 'getCat',
+        "POST /api/cats": 'createCat',
         "PUT /api/cats/:id": 'updateCat'
       }
     }),
