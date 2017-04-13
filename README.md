@@ -22,7 +22,8 @@ module.exports = {
       routes: {
         "GET /api/cats": 'catGetter'
         "GET /api/cats/:id": 'catGetter'
-        "GET /api/cats/:id": 'catGetter'
+        "POST /api/cats": 'catSetter'
+        "PUT /api/cats/:id": 'catSetter'
       }
     }),
     catGetter: function(event, context, callback) {
