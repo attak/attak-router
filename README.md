@@ -44,7 +44,7 @@ module.exports = {
 }
 ```
 
-By default, handler functions are called via [local invocation](), but the router can be configured using the `invocation` constructor parameter:
+By default, handler functions are called from within the request handler process (`invocation: 'local'`), but the router can be configured using the `invocation` constructor parameter:
 
 ```js
   new Router({
