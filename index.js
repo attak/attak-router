@@ -57,7 +57,12 @@ class Router {
       }
     };
     
-    this.router.handle(event, response, function(err) {
+    var request = {
+      method: event.httpMethod.toLowerCase(),
+      url: event.path
+    }
+
+    this.router.handle(request, response, function(err) {
       if (err) {
         throw err
       }
