@@ -27,7 +27,7 @@ class Router {
         
         var closure = function(method, fullPath, handleProc) {
           _this.router[method](fullPath, function(req, res, done) {
-            res.invoke(handleProc)
+            res.invoke(handleProc, req)
           })
         }
 
@@ -39,16 +39,12 @@ class Router {
   handler(event, context, callback) {
     var _this = this
     var routes = this.options.routes
-    var invocation = this.options.invocation || 'local'
     var results = undefined
     var response = {
-      invoke: function(handleProc) {
+      invoke: function(handleProc, req) {
         if (handleProc) {
-          if (invocation === 'local') {
-            context.invokeLocal(handleProc, event, callback)
-          } else {
-            context.invoke(handleProc, event, callback)
-          }
+          event.params = req.params
+          context.invokeLocal(handleProc, event, callback)
         } else {
           callback(null, {
             httpStatus: 404
